@@ -1,0 +1,60 @@
+[
+  {
+    "name": "MM",
+    "idPessoa": 0,
+    "role": "FUNCIONARIO"
+  },
+  {
+    "name": "TTTt",
+    "idPessoa": 1,
+    "role": "FUNCIONARIO"
+  },
+  {
+    "name": "YYYY",
+    "idPessoa": 2,
+    "role": "HOSPEDE"
+  },
+  {
+    "name": "Marcelo",
+    "idPessoa": 3,
+    "role": "FUNCIONARIO"
+  },
+  {
+    "name": "ISEP",
+    "idPessoa": 4,
+    "role": "FUNCIONARIO"
+  },
+  {
+    "name": "ISEP33",
+    "idPessoa": 5,
+    "role": "HOSPEDE"
+  },
+  {
+    "name": "FABAMAQ",
+    "idPessoa": 6,
+    "role": "FUNCIONARIO",
+    "contactos": {
+      "list": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  },
+  {
+    "name": "MMArceloP",
+    "idPessoa": 7,
+    "role": "FUNCIONARIO",
+    "contactos": {
+      "list": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  }
+]

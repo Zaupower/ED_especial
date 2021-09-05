@@ -1,0 +1,41 @@
+{
+  "hotel": "Toca",
+  "versao": 1,
+  "divisoes": [
+    {
+      "nome":"Hall de entrada",
+      "lotacao": 25
+    },
+    {
+      "nome":"Cozinha",
+      "lotacao": 10,
+      "reservado":true
+    },
+    {
+      "nome":"Restaurante Asiático",
+      "lotacao": 40
+    },
+    {
+      "nome":"Quarto Escuro",
+      "lotacao": 100
+    }
+  ],
+  "ligacoes": [
+    [
+      "Hall de entrada",
+      "Cozinha"
+    ],
+    [
+      "Hall de entrada",
+      "Quarto Escuro"
+    ],
+    [
+      "Quarto Escuro",
+      "Restaurante Asiático"
+    ],
+    [
+      "Cozinha",
+      "Restaurante Asiático"
+    ]
+  ]
+}

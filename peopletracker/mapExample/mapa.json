@@ -1,0 +1,183 @@
+{
+  "hotel": "Toca",
+  "versao": 1,
+  "divisoes": [
+    {
+      "nome":"Hall de entrada",
+      "lotacao": 25,
+      "reservado":true
+    },
+    {
+      "nome":"Cozinha",
+      "lotacao": 10,
+      "reservado":true
+    },
+    {
+      "nome":"Quarto 101",
+      "lotacao": 4
+    },
+    {
+      "nome":"Quarto 60",
+      "lotacao": 4
+    },
+    {
+      "nome":"Quarto 102",
+      "lotacao": 3
+    },
+    {
+      "nome":"Quarto 103",
+      "lotacao": 6
+    },
+    {
+      "nome":"Quarto 104",
+      "lotacao": 2
+    },
+    {
+      "nome":"Quarto 105",
+      "lotacao": 6
+    },
+    {
+      "nome":"Quarto 106",
+      "lotacao": 1
+    },
+    {
+      "nome":"Restaurante Asiático",
+      "lotacao": 40
+    },
+    {
+      "nome":"Restaurante Buffet",
+      "lotacao": 80
+    },
+    {
+      "nome":"WC",
+      "lotacao": 4
+    },
+    {
+      "nome":"Corredor 1",
+      "lotacao": 15
+    },
+    {
+      "nome":"Sala de quarentena 1",
+      "lotacao": 10,
+      "quarentena":true
+    },
+    {
+      "nome":"Sala de quarentena 2",
+      "lotacao": 5
+    },
+    {
+      "nome":"Salão de jogos",
+      "lotacao": 17
+    },
+    {
+      "nome":"Elevador",
+      "lotacao": 5
+    },
+    {
+      "nome": "Garagem",
+      "lotacao": 40
+    }  
+  ],
+  "ligacoes": [
+    [
+      "Hall de entrada",
+      "Restaurante Asiático"
+    ],
+    [
+      "Restaurante Asiático",
+      "Cozinha"
+    ],
+    [
+      "Hall de entrada",
+      "Restaurante Buffet"
+    ],
+    [
+      "Restaurante Buffet",
+      "Cozinha"
+    ],
+    [
+      "Restaurante Buffet",
+      "Quarto 60"
+    ],
+    [
+      "Hall de entrada",
+      "WC"
+    ],
+    [
+      "Hall de entrada",
+      "Quarto 60"
+    ],
+    [
+      "Hall de entrada",
+      "Elevador"
+    ],
+    [
+      "Hall de entrada",
+      "Salão de jogos"
+    ],
+    [
+      "Salão de jogos",
+      "Quarto 60"
+    ],
+    [
+      "Elevador",
+      "Quarto 101"
+    ],
+    [
+      "Elevador",
+      "Quarto 102"
+    ],
+    [
+      "Elevador",
+      "Quarto 103"
+    ],
+    [
+      "Elevador",
+      "Quarto 104"
+    ],
+    [
+      "Elevador",
+      "Quarto 105"
+    ],
+    [
+      "Elevador",
+      "Quarto 106"
+    ],
+    [
+      "Elevador",
+      "Corredor 1"
+    ],
+    [
+      "Corredor 1",
+      "Quarto 104"
+    ],
+    [
+      "Corredor 1",
+      "Quarto 105"
+    ],
+    [
+      "Corredor 1",
+      "Quarto 106"
+    ],
+    [
+      "Elevador",
+      "Garagem"
+    ],
+    [
+      "Hall de entrada",
+      "Garagem"
+    ],
+    [
+      "Sala de quarentena 1",
+      "Garagem"
+    ],
+    [
+      "Sala de quarentena 1",
+      "Sala de quarentena 2"
+    ],
+    [
+      "Sala de quarentena 1",
+      "Restaurante Asiático"
+    ]
+  ]
+}
