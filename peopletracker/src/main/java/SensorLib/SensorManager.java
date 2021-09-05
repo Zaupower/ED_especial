@@ -18,6 +18,13 @@ public class SensorManager {
     private NetworkHotel<Divisao> graph;
     private String originalMapPathString;
 
+    /**
+     * Manage, store and read information from the sensors, hold the map info to
+     * @param mapa
+     * @param originalMapPathString
+     * @throws InvalidIndexException
+     * @throws EmptyException
+     */
     public SensorManager(Mapa mapa, String originalMapPathString) throws InvalidIndexException, EmptyException {
         this.mapa = mapa;
         this.mapa.cleanPaths();
@@ -26,6 +33,11 @@ public class SensorManager {
         this.originalMapPathString = originalMapPathString;
     }
 
+    /**
+     * Initialize the grap structure from the map
+     * @param mapa
+     * @param graph
+     */
     private void initializeGraph(Mapa mapa, NetworkHotel<Divisao> graph) {
         for (int i = 0; i < mapa.numeroDivisoes(); i++) {
             graph.addVertex(mapa.getDivisao(i));
@@ -41,6 +53,15 @@ public class SensorManager {
         }
     }
 
+    /**
+     * Get shortest path from one division to another
+     * @param inicio
+     * @param fim
+     * @param graph
+     * @return
+     * @throws InvalidIndexException
+     * @throws EmptyException
+     */
     public ArrayUnorderedList<ArrayUnorderedList<Integer>> getShortestPath(Divisao inicio, Divisao fim, NetworkHotel graph) throws InvalidIndexException, EmptyException {
 
         return graph.getShortestPath(inicio, fim);
@@ -53,7 +74,13 @@ public class SensorManager {
         }
      */
 
-
+    /**
+     * Verify two rooms has connection
+     * @param divisao
+     * @param index
+     * @param graph
+     * @return
+     */
     public boolean hasEdge(String divisao, int index, NetworkHotel<Divisao> graph) {
         if (graph.getVertex(index).getLigacoes().contains(divisao)) {
             return true;
@@ -83,7 +110,10 @@ public class SensorManager {
         }
     }
 
-
+    /**
+     * Print Sensors Alerts
+     * @param listaDeAlertas
+     */
     private void printAlerts(ArrayUnorderedList<ArrayUnorderedList<String>> listaDeAlertas) {
         Iterator<ArrayUnorderedList<String>> it = listaDeAlertas.iterator();
         while (it.hasNext()) {
@@ -99,13 +129,21 @@ public class SensorManager {
         }
     }
 
-    public void getPersonContatosById(int id) {
-
-    }
-
     private RegisterPerson registerPerson = new RegisterPerson();
     boolean movesNotRead = false;
 
+    /**
+     * Find person By Id
+     * @param id
+     * @param movimentos
+     * @param mapaUsado
+     * @return
+     * @throws IOException
+     * @throws EmptyException
+     * @throws NotFoundException
+     * @throws NoComparableException
+     * @throws ParseException
+     */
     public Divisao findPersonById(int id, String movimentos, Mapa mapaUsado) throws IOException, EmptyException, NotFoundException, NoComparableException, ParseException {
         this.readMoves(movimentos, false, mapaUsado);
         movesNotRead = true;
@@ -118,6 +156,18 @@ public class SensorManager {
         return null;
     }
 
+    /**
+     * Find best path to quarentine for an initial path
+     * @param id
+     * @param movimentosFileName
+     * @param newMapa
+     * @throws EmptyException
+     * @throws NotFoundException
+     * @throws IOException
+     * @throws ParseException
+     * @throws NoComparableException
+     * @throws InvalidIndexException
+     */
     public void findBestPAthToQuarentine(int id, String movimentosFileName, Mapa newMapa) throws EmptyException, NotFoundException, IOException, ParseException, NoComparableException, InvalidIndexException {
         Person p = registerPerson.getPersonById(id);
 
@@ -127,9 +177,6 @@ public class SensorManager {
             ArrayUnorderedList<ArrayUnorderedList<Divisao>> allPathsDivisoes;
 
             if (!start.getReservado() && p.getRole() != PersonType.FUNCIONARIO && newMapa.isMapConected()) {
-                //Divisao end  uma quarentena;
-                //newMapa.cleanPathsToHospedes();
-                //newMapa.cleanConnectionsAndRooms();
                 NetworkHotel<Divisao> newGraph = new NetworkHotel<>(newMapa.numeroDivisoes());
                 this.initializeGraph(newMapa, newGraph);
 
@@ -138,7 +185,6 @@ public class SensorManager {
                 while (it.hasNext()){
                     newGraph.removeVertex(it.next());
                 }
-
                 if ( newGraph.isConnected()){
                     ArrayUnorderedList<Divisao> quarentenaRooms = newMapa.getQuarentenaRooms();
                     ArrayUnorderedList<ArrayUnorderedList<Integer>> allpathsInteger = this.getShortestPath(start, quarentenaRooms.first(), newGraph);
@@ -152,7 +198,6 @@ public class SensorManager {
                 this.mapa = new Mapa();
                 mapa.lerJson(this.originalMapPathString);
                 ArrayUnorderedList<Divisao> quarentenaRooms = newMapa.getQuarentenaRooms();
-
                 ArrayUnorderedList<ArrayUnorderedList<Integer>> indexRommsPath = this.getShortestPath(start, quarentenaRooms.first(), this.graph);
                 ArrayUnorderedList<ArrayUnorderedList<Divisao>> allPathsDivisoesSingle = this.getAllPathsDivisions(indexRommsPath, this.mapa);
 
@@ -163,7 +208,13 @@ public class SensorManager {
 
     }
 
-    //Ver esta classe
+    /**
+     * Calculate best path to Quarentine
+     * @param allPathsDivisoes
+     * @param start
+     * @param quarentenaRooms
+     * @throws EmptyException
+     */
     private void calculateBestPathToQuarentine(ArrayUnorderedList<ArrayUnorderedList<Divisao>> allPathsDivisoes, Divisao start, ArrayUnorderedList<Divisao> quarentenaRooms) throws EmptyException {
         ArrayUnorderedList<ArrayUnorderedList<Divisao>> allQuarentenaPaths = this.getAllQuarentenaPaths(allPathsDivisoes, quarentenaRooms);
         if (allQuarentenaPaths.isEmpty() || allQuarentenaPaths == null){
@@ -204,6 +255,11 @@ public class SensorManager {
         }
     }
 
+    /**
+     * Get path sum of all persons contacted
+     * @param nextPath
+     * @return
+     */
     private double getPathSum(ArrayUnorderedList<Divisao> nextPath) {
         Iterator<Divisao> it = nextPath.iterator();
         double sum = 0;
@@ -247,6 +303,12 @@ public class SensorManager {
         return quarentenaPaths;
     }
 
+    /**
+     * Get list of lists containning all division path
+     * @param allPaths
+     * @param mapUSed
+     * @return
+     */
     private ArrayUnorderedList<ArrayUnorderedList<Divisao>> getAllPathsDivisions(ArrayUnorderedList<ArrayUnorderedList<Integer>> allPaths, Mapa mapUSed) {
         Iterator<ArrayUnorderedList<Integer>> it = allPaths.iterator();
         ArrayUnorderedList<ArrayUnorderedList<Divisao>> allPathsList = new ArrayUnorderedList<>();
@@ -272,6 +334,17 @@ public class SensorManager {
         return bestPath;
     }
 
+    /**
+     * Get person contact from last given hours
+     * @param hora
+     * @param personId
+     * @param mapaUsado
+     * @throws IOException
+     * @throws EmptyException
+     * @throws NotFoundException
+     * @throws ParseException
+     * @throws NoComparableException
+     */
     public void getPersonContactsFromLastHours(String hora, int personId, Mapa mapaUsado) throws IOException, EmptyException, NotFoundException, ParseException, NoComparableException {
         Person p = getPerson(personId);
         String movesFile = "movimentos.json";
@@ -288,6 +361,15 @@ public class SensorManager {
 
     }
 
+    /**
+     * Print person moviments
+     * @param listaDeMovimentos
+     * @param id
+     * @param hora
+     * @throws ParseException
+     * @throws IOException
+     * @throws EmptyException
+     */
     private void printMovimentos(ArrayUnorderedList<MovimentoComplexo> listaDeMovimentos, int id, String hora) throws ParseException, IOException, EmptyException {
         ArrayUnorderedList<String[]> horaEntradaSaida = getHoraEntradaSaidaNaDivisao(listaDeMovimentos, id);
 
@@ -305,6 +387,16 @@ public class SensorManager {
         }
     }
 
+    /**
+     * Calculate contacts made by a person after moving
+     * @param listaDeMovimentos
+     * @param inOutsE
+     * @param id
+     * @param hora
+     * @throws IOException
+     * @throws EmptyException
+     * @throws ParseException
+     */
     private void calculateContactos(ArrayUnorderedList<MovimentoComplexo> listaDeMovimentos, String[] inOutsE, int id, String hora) throws IOException, EmptyException, ParseException {
         for (int i = 0; i < listaDeMovimentos.size(); i++) {
             MovimentoComplexo movimentoComplexoNovo = listaDeMovimentos.getIndex(i);
@@ -340,6 +432,12 @@ public class SensorManager {
         }
     }
 
+    /**
+     * Parse date to time
+     * @param dateTime
+     * @return
+     * @throws ParseException
+     */
     private long parseDateTimeToSeconds(String dateTime) throws ParseException {
 
         if (!dateTime.equals("Nao Registrado")) {
@@ -350,6 +448,11 @@ public class SensorManager {
         return -1;
     }
 
+    /**
+     * Parse time seconds to string
+     * @param timeInt
+     * @return
+     */
     private String timeParserToString(long timeInt) {
         Date currentDate = new Date(timeInt * 1000);
         SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm");
@@ -395,6 +498,12 @@ public class SensorManager {
         return horasDoUtilizador;
     }
 
+    /**
+     * Find person by id
+     * @param personId
+     * @return
+     * @throws IOException
+     */
     private Person getPerson(int personId) throws IOException {
         RegisterPerson registerPerson = new RegisterPerson();
 
@@ -405,6 +514,9 @@ public class SensorManager {
         return p;
     }
 
+    /**
+     * Print all divisions
+     */
     public void printDivisions() {
         Divisao[] divisaos = this.mapa.getDivisoes();
         if (divisaos == null){

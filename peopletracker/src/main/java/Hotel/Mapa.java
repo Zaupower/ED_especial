@@ -31,26 +31,51 @@ public class Mapa {
     private ArrayUnorderedList<Divisao> reservadoRooms = new ArrayUnorderedList<>();
 
 
+    /**
+     * Get Hotel Name
+     * @return
+     */
     public String getHotel() {
         return hotel;
     }
 
+    /**
+     * Set Hotel name
+     * @param hotel
+     */
     public void setHotel(String hotel) {
         this.hotel = hotel;
     }
 
+    /**
+     * Get Version
+     * @return
+     */
     public Integer getVersao() {
         return versao;
     }
 
+    /**
+     * Set Version
+     * @param versao
+     */
     public void setVersao(Integer versao) {
         this.versao = versao;
     }
 
+    /**
+     * Get divisao[] from this map
+     * @return
+     */
     public Divisao[] getDivisoes() {
         return divisoes;
     }
 
+    /**
+     * Get divisao by index
+     * @param i
+     * @return
+     */
     public Divisao getDivisao(int i) {
         if (i <= divisoes.length) {
 
@@ -59,16 +84,26 @@ public class Mapa {
         return null;
     }
 
-
+    /**
+     * Set all divisoes
+     * @param divisoes
+     */
     public void setDivisoes(Divisao[] divisoes) {
         this.divisoes = divisoes;
     }
 
+    /**
+     * Get all divisoes
+     * @return
+     */
     public String[][] getLigacoes() {
         return ligacoes;
     }
 
-
+    /**
+     * Set all ligacoes[][]
+     * @param ligacoes
+     */
     public void setLigacoes(String[][] ligacoes) {
         this.ligacoes = ligacoes;
     }
@@ -100,6 +135,11 @@ public class Mapa {
         }
     }
 
+    /**
+     * Set ligacoes
+     * @param mapa Class
+     * @param ligacoes matrix of strings
+     */
     public void setLigacoes(Mapa mapa, String[][] ligacoes) {
         for (int j = 0; j < ligacoes.length; j++) {
             for (int i = 0; i < mapa.numeroDivisoes(); i++) {
@@ -171,7 +211,7 @@ public class Mapa {
      * if max capacity reached Alert Max Capacity
      * if max capacity ultrapassed Max Capacity Ultrapassed
      *
-     * @param movimento
+     * @param movimento Movimento
      * @return
      */
     public ArrayUnorderedList<String> addPersonToDivision(Movimento movimento) throws IOException, EmptyException, NotFoundException, NoComparableException, ParseException {
@@ -194,6 +234,14 @@ public class Mapa {
         return this.divisoes[divisionId].addCurrentPerson(mc);
     }
 
+    /**
+     * Serach for person in other room if found remove it
+     * @param movimento
+     * @return
+     * @throws EmptyException
+     * @throws NotFoundException
+     * @throws IOException
+     */
     private int verifyIfPersonIsAlreadyInAnotherRoom(MovimentoComplexo movimento) throws EmptyException, NotFoundException, IOException {
         for (int i = 0; i < this.divisoes.length; i++) {
             if (this.divisoes[i].isPersonOnTheRoom(movimento.getIdPessoa())) {
@@ -205,6 +253,12 @@ public class Mapa {
         return -1;
     }
 
+    /**
+     * Parse date String to seconds
+     * @param dateTime
+     * @return
+     * @throws ParseException
+     */
     private int parseDateTimeToSeconds(String dateTime) throws ParseException {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm");
@@ -212,6 +266,9 @@ public class Mapa {
         return (int) ts;
     }
 
+    /**
+     * Clear this Mapa paths in all divisoes
+     */
     public void cleanPaths() {
         boolean exists = false;
         ArrayUnorderedList<Divisao> newDivisions = new ArrayUnorderedList<>();
@@ -246,6 +303,11 @@ public class Mapa {
         }
     }
 
+    /**
+     * Get division from this mapa by name
+     * @param name
+     * @return
+     */
     private int getDisionIdByName(String name) {
         for (int i = 0; i < this.divisoes.length; i++) {
             if (this.divisoes[i].getNome().equals(name)) {
@@ -255,6 +317,10 @@ public class Mapa {
         return -1;
     }
 
+    /**
+     * Refactor divisions
+     * @param newDivisions
+     */
     private void refoctorDivisoes(ArrayUnorderedList<Divisao> newDivisions) {
         this.divisoes = new Divisao[newDivisions.size()];
         for (int i = 0; i < newDivisions.size(); i++) {
@@ -262,7 +328,10 @@ public class Mapa {
         }
     }
 
-    //TRABALHAR AQUI
+    /**
+     * Refactor Ligacoes
+     * @param divisionToRemove
+     */
     private void refoctorLigacoes(ArrayUnorderedList<Integer> divisionToRemove) {
         //System.out.println( "rEFACTOR LIGACOES" );
         ArrayUnorderedList<String[]> newConections = new ArrayUnorderedList<>();
@@ -291,6 +360,11 @@ public class Mapa {
         }
     }
 
+    /**
+     * Search person on this room
+     * @param id
+     * @return
+     */
     public Divisao searchPerson(int id) {
         Divisao d = this.divisoes[0];
         //d.setNome("NotFound");
@@ -302,6 +376,10 @@ public class Mapa {
         return null;
     }
 
+    /**
+     * Get all contacts methe in this room
+     * @return
+     */
     public ArrayUnorderedList<ArrayUnorderedList<MovimentoComplexo>> getallContacts() {
         ArrayUnorderedList<ArrayUnorderedList<MovimentoComplexo>> allMoves = new ArrayUnorderedList<>();
         for (int i = 0; i < this.divisoes.length; i++) {
@@ -391,12 +469,19 @@ public class Mapa {
         }
     }
 
+    /**
+     * Clear all moves and divisions
+     */
     public void cleanMovesInRoom() {
         for (int i = 0; i < divisoes.length; i++) {
             divisoes[i].cleanMoves();
         }
     }
 
+    /**
+     * Verify if Map is connected
+     * @return
+     */
     public boolean isMapConected() {
         boolean isMapConected = true;
         for (int i = 0; i < divisoes.length; i++) {
@@ -441,6 +526,12 @@ public class Mapa {
         }
     }
 
+    /**
+     * Search for a division if found return true
+     * @param listaDivisoes
+     * @param name
+     * @return
+     */
     public boolean containsDivisao(ArrayUnorderedList<Divisao> listaDivisoes, String name) {
         Iterator<Divisao> it = listaDivisoes.iterator();
         while (it.hasNext()) {
@@ -452,6 +543,11 @@ public class Mapa {
         return false;
     }
 
+    /**
+     * Get division by name
+     * @param name
+     * @return
+     */
     public Divisao getDivisaoByName(String name) {
         for (int i = 0; i < divisoes.length; i++) {
             if (divisoes[i].getNome().equals(name)) {

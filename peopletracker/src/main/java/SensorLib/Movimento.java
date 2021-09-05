@@ -11,6 +11,10 @@ public class Movimento {
     public Movimento() throws IOException {
     }
 
+    /**
+     * Get person from movimento
+     * @return
+     */
     public int getIdPessoa() {
         return this.idPessoa;
     }

@@ -113,7 +113,7 @@ public class Divisao {
     }
 
     /**
-     *
+     * Add Connection
      * @param ligacao
      */
     public void addLigacao(String ligacao) {
@@ -142,6 +142,13 @@ public class Divisao {
         return false;
     }
 
+    /**
+     * Add current prson to the room
+     * @param movimento
+     * @return
+     * @throws NoComparableException
+     * @throws IOException
+     */
     public ArrayUnorderedList<String> addCurrentPerson(MovimentoComplexo movimento) throws NoComparableException, IOException {
         /**
          * Add Sensor alerts!!
@@ -186,6 +193,13 @@ public class Divisao {
                 '}';
     }
 
+    /**
+     * Remove personFrom Room
+     * @param movimento
+     * @throws EmptyException
+     * @throws NotFoundException
+     * @throws IOException
+     */
     public void removePersonFromRoom(MovimentoComplexo movimento) throws EmptyException, NotFoundException, IOException {
         if (!this.currentPersonsOnRoom.isEmpty()){
             for ( int i = 0; i < this.currentPersonsOnRoom.size(); i++){
@@ -198,6 +212,10 @@ public class Divisao {
 
     }
 
+    /**
+     * Remove conection from map
+     * @param conctionToRemove
+     */
     public void removeConection(String conctionToRemove){
         ArrayUnorderedList<String> newConectionsList = new ArrayUnorderedList<>();
         Iterator<String> it = this.ligacoes.iterator();
@@ -219,6 +237,9 @@ public class Divisao {
         //System.out.printf("blaaa");
     }
 
+    /**
+     * Print this division content
+     */
     public void printDivision() {
         System.out.println("Divisao: "+this.getNome()+ " ");
         ArrayUnorderedList<MovimentoComplexo> currentPersons = this.getSensor().getEntradasEsaidasCompleto();

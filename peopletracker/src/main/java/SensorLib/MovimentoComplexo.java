@@ -11,6 +11,13 @@ public class MovimentoComplexo extends Movimento {
     private String divisaoName;
     private Movimento entrada;
     private Movimento saida;
+
+    /**
+     * Moviemnto com Entrada e saida
+     * @param movimento
+     * @param p
+     * @throws IOException
+     */
     public MovimentoComplexo(Movimento movimento, Person p) throws IOException {
         this.setPerson(p);
         this.setIdPessoa(p.getIdPessoa());

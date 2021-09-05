@@ -14,6 +14,11 @@ public class MovimentosManager {
     private JSONArray Movimentos;
     private LinkedQueue<Movimento> movimentosRealizados = new LinkedQueue<>();
 
+    /**
+     * Read file s with movimentos made on the Map class
+     * @param s
+     * @throws IOException
+     */
         public void loadMovimentosFromJson(String s) throws IOException {
             Gson gson = new Gson();
             String json = "./movimentos/" + s;

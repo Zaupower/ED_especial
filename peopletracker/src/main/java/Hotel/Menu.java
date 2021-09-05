@@ -56,6 +56,15 @@ public class Menu {
 
     }
 
+    /**
+     * Print map divisions
+     * @throws InvalidIndexException
+     * @throws EmptyException
+     * @throws NotFoundException
+     * @throws IOException
+     * @throws ParseException
+     * @throws NoComparableException
+     */
     private void printMap() throws InvalidIndexException, EmptyException, NotFoundException, IOException, ParseException, NoComparableException {
         isMapReadOrMoviments();
         Mapa m = new Mapa();
@@ -65,6 +74,15 @@ public class Menu {
         sensorManager.printDivisions();
     }
 
+    /**
+     * find person on the map
+     * @throws IOException
+     * @throws InvalidIndexException
+     * @throws EmptyException
+     * @throws NotFoundException
+     * @throws ParseException
+     * @throws NoComparableException
+     */
     private void findPersonOnMap() throws IOException, InvalidIndexException, EmptyException, NotFoundException, ParseException, NoComparableException {
         isMapReadOrMoviments();
         Scanner input = new Scanner(System.in);
@@ -84,6 +102,16 @@ public class Menu {
 
     }
 
+    /**
+     * Find a person on the map
+     * @param type
+     * @throws IOException
+     * @throws InvalidIndexException
+     * @throws EmptyException
+     * @throws NotFoundException
+     * @throws ParseException
+     * @throws NoComparableException
+     */
     private void findPerson(PersonType type) throws IOException, InvalidIndexException, EmptyException, NotFoundException, ParseException, NoComparableException {
 
         ArrayUnorderedList<Person> persons = getPeopleFromType(type);
@@ -105,6 +133,16 @@ public class Menu {
         }
     }
 
+    /**
+     * Print the best Path to the quarentine
+     * @param idPessoa
+     * @throws InvalidIndexException
+     * @throws EmptyException
+     * @throws NotFoundException
+     * @throws IOException
+     * @throws ParseException
+     * @throws NoComparableException
+     */
     private void printBestPathToQuarentine(int idPessoa) throws InvalidIndexException, EmptyException, NotFoundException, IOException, ParseException, NoComparableException {
         isMapReadOrMoviments();
         Scanner input = new Scanner(System.in);
@@ -120,6 +158,15 @@ public class Menu {
         }
     }
 
+    /**
+     * Print sensors Alerts while reading moviments on the map
+     * @throws InvalidIndexException
+     * @throws EmptyException
+     * @throws NotFoundException
+     * @throws IOException
+     * @throws ParseException
+     * @throws NoComparableException
+     */
     private void prinSensorsAlerts() throws InvalidIndexException, EmptyException, NotFoundException, IOException, ParseException, NoComparableException {
         isMapReadOrMoviments();
 
@@ -132,6 +179,9 @@ public class Menu {
         sensorManager.readMoves(this.movimentsFileName, true, m);
     }
 
+    /**
+     * Preload Mapa and Movimentos
+     */
     private void preloadMapAndMoviments() {
         String mapFileName = readMap();
         String movesFileName = readMoviments();
@@ -139,6 +189,10 @@ public class Menu {
         this.movimentsFileName = movesFileName;
     }
 
+    /**
+     * Verify if Map string name is load and moviments
+     * @return
+     */
     private boolean isMapReadOrMoviments() {
         boolean isread = false;
         if (this.mapFileName == null) {
@@ -157,6 +211,10 @@ public class Menu {
         return isread;
     }
 
+    /**
+     * Prnts all registered persons on the program to the cnsole
+     * @throws IOException
+     */
     private void printAllPersonsRegistered() throws IOException {
         RegisterPerson registerPerson = new RegisterPerson();
         System.out.println("Printing all registered persons");

@@ -19,6 +19,11 @@ public class Sensor {
     private ArrayUnorderedList<MovimentoComplexo> saidas = new ArrayUnorderedList<>();
     private ArrayUnorderedList<MovimentoComplexo> entradasEsaidasCompleto = new ArrayUnorderedList<>();
 
+    /**
+     * Add enter room register
+     * @param movimento
+     * @throws IOException
+     */
     public void addEntrada(MovimentoComplexo movimento) throws IOException {
         this.entradas.addToRear(movimento);
         MovimentoComplexo entradaESaida = new MovimentoComplexo(movimento, movimento.getPerson());
@@ -31,6 +36,11 @@ public class Sensor {
         this.entradasEsaidasCompleto.addToRear(movimento);
     }
 
+    /**
+     * Add exit register
+     * @param movimento
+     * @throws IOException
+     */
     public void addSaida(MovimentoComplexo movimento) throws IOException {
         this.saidas.addToRear(movimento);
         for (int i = 0; i < entradasEsaidasCompleto.size(); i++){
@@ -47,6 +57,10 @@ public class Sensor {
 
     }
 
+    /**
+     * Return all moviments made on the room
+     * @return
+     */
     public ArrayUnorderedList<MovimentoComplexo> getEntradasEsaidasCompleto() {
         return this.entradasEsaidasCompleto;
     }
