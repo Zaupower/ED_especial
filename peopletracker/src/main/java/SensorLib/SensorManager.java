@@ -6,6 +6,7 @@ import main.java.Hotel.*;
 import main.java.User.Person;
 import main.java.User.RegisterPerson;
 
+import javax.sound.midi.Soundbank;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -192,6 +193,15 @@ public class SensorManager {
                     allPathsDivisoes = this.getAllPathsDivisions(allpathsInteger, newMapa);
 
                     this.calculateBestPathToQuarentine(allPathsDivisoes, start, quarentenaRooms);
+                }else {
+                    System.out.println("Need to override rules to give an optimal path");
+                    this.mapa = new Mapa();
+                    mapa.lerJson(this.originalMapPathString);
+                    ArrayUnorderedList<Divisao> quarentenaRooms = newMapa.getQuarentenaRooms();
+                    ArrayUnorderedList<ArrayUnorderedList<Integer>> indexRommsPath = this.getShortestPath(start, quarentenaRooms.first(), this.graph);
+                    ArrayUnorderedList<ArrayUnorderedList<Divisao>> allPathsDivisoesSingle = this.getAllPathsDivisions(indexRommsPath, this.mapa);
+
+                    this.calculateBestPathToQuarentine(allPathsDivisoesSingle, start, quarentenaRooms);
                 }
 
             } else {

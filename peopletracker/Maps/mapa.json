@@ -4,7 +4,8 @@
   "divisoes": [
     {
       "nome":"Hall de entrada",
-      "lotacao": 25
+      "lotacao": 25,
+      "reservado":true
     },
     {
       "nome":"Cozinha",
